@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatTime, isOpenAt, istParts, weekRows, type DayHours } from "../../src/lib/hours";
+import { formatTime, isOpenAt, istParts, nextChange, weekRows, type DayHours } from "../../src/lib/hours";
 
 const hours: DayHours[] = [
   { day: 1, open: "08:00", close: "22:30" },
@@ -50,4 +50,21 @@ describe("weekRows", () => {
     expect(rows[1].slots).toEqual([]);
     expect(rows[6].slots).toEqual([{ day: 0, open: "09:00", close: "13:00" }]);
   });
+});
+
+describe("nextChange", () => {
+  const week: DayHours[] = [
+    { day: 1, open: "08:00", close: "22:30" },
+    { day: 2, open: "08:00", close: "22:30" },
+    { day: 0, open: "09:00", close: "13:00" },
+  ];
+  it("while open, returns today's closing time", () =>
+    expect(nextChange(ist("2026-09-28T10:00:00"), week)).toBe("22:30"));
+  it("after closing, returns next morning's opening time", () =>
+    expect(nextChange(ist("2026-09-28T23:00:00"), week)).toBe("08:00"));
+  it("Sunday afternoon, returns Monday's opening time", () =>
+    expect(nextChange(ist("2026-09-27T14:00:00"), week)).toBe("08:00"));
+  it("is independent of the device time zone (UTC input)", () =>
+    expect(nextChange(new Date("2026-09-28T04:30:00Z"), week)).toBe("22:30"));
+  it("returns null when the shop never opens", () => expect(nextChange(ist("2026-09-28T10:00:00"), [])).toBeNull());
 });

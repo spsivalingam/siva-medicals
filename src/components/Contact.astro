@@ -9,7 +9,7 @@ const { locale } = Astro.props;
 const s = t(locale);
 const row = "flex min-h-11 items-center gap-3 rounded-lg px-2 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-teal-700";
 ---
-<section id="contact" aria-labelledby="contact-title" class="mx-auto max-w-5xl px-4 py-14">
+<section id="contact" aria-labelledby="contact-title" class="mx-auto max-w-5xl px-4 py-10 sm:py-14">
   <h2 id="contact-title" class="text-2xl font-bold sm:text-3xl">{s.contact.title}</h2>
   <p class="mt-3 max-w-xl text-lg text-slate-700">{s.contact.lead}</p>
   <a

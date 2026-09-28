@@ -29,7 +29,7 @@ const other: Locale = locale === "en" ? "ta" : "en";
       <a
         href={telLink(site.phone)}
         data-testid="header-call"
-        class="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-teal-700 px-3 text-base font-bold text-white hover:bg-teal-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
+        class="max-sm:hidden inline-flex min-h-11 items-center gap-1.5 rounded-full bg-teal-700 px-3 text-base font-bold text-white hover:bg-teal-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
       >
         <Phone class="h-4 w-4" aria-hidden="true" />
         <span class="max-sm:sr-only">{s.cta.call}</span>

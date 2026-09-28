@@ -37,6 +37,19 @@ export function formatTime(hhmm: string, locale: "en" | "ta"): string {
   );
 }
 
+/** Next IST time ("HH:MM") the open/closed state flips, or null if it never does within a week. */
+export function nextChange(date: Date, hours: readonly DayHours[]): string | null {
+  const now = isOpenAt(date, hours);
+  for (let m = 1; m <= 7 * 24 * 60; m++) {
+    const t = new Date(date.getTime() + m * 60_000);
+    if (isOpenAt(t, hours) !== now) {
+      const { minutes } = istParts(t);
+      return `${String(Math.floor(minutes / 60)).padStart(2, "0")}:${String(minutes % 60).padStart(2, "0")}`;
+    }
+  }
+  return null;
+}
+
 const WEEK_ORDER = [1, 2, 3, 4, 5, 6, 0] as const;
 
 export function weekRows(hours: readonly DayHours[]): { day: number; slots: DayHours[] }[] {

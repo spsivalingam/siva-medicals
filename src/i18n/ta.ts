@@ -14,6 +14,7 @@ export const ta: Dict = {
     directions: "வழி காட்டு",
     whatsappMessage: "வணக்கம், ஒரு மருந்து பற்றி கேட்க வேண்டும்.",
   },
+  bar: { label: "விரைவு தொடர்பு", call: "அழைக்க", whatsapp: "WhatsApp", directions: "வழி" },
   hero: {
     eyebrow: "பதிவு பெற்ற மருந்தாளர் பணியில்",
     title: "உண்மையான மருந்துகள், உங்கள் அருகிலேயே",
@@ -45,6 +46,8 @@ export const ta: Dict = {
     closed: "விடுமுறை",
     openNow: "இப்போது திறந்துள்ளது",
     closedNow: "இப்போது மூடப்பட்டுள்ளது",
+    openUntil: "திறந்துள்ளது · {time} வரை",
+    closedUntil: "மூடப்பட்டுள்ளது · {time} திறக்கும்",
     note: "பொது விடுமுறை நாட்களில் நேரம் மாறலாம். முன்கூட்டியே அழைக்கவும்.",
   },
   location: { title: "எங்கள் இருப்பிடம்", open: "Google Maps-இல் திறக்கவும்" },

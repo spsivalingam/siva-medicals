@@ -12,6 +12,7 @@ export const en = {
     directions: "Get directions",
     whatsappMessage: "Hello, I have a question about a medicine.",
   },
+  bar: { label: "Quick contact", call: "Call", whatsapp: "WhatsApp", directions: "Directions" },
   hero: {
     eyebrow: "Registered pharmacist on duty",
     title: "Genuine medicines, close to home",
@@ -43,6 +44,8 @@ export const en = {
     closed: "Closed",
     openNow: "Open now",
     closedNow: "Closed now",
+    openUntil: "Open now · closes {time}",
+    closedUntil: "Closed now · opens {time}",
     note: "Hours may change on public holidays. Please call ahead.",
   },
   location: { title: "Find us", open: "Open in Google Maps" },

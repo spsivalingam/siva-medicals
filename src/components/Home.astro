@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import ActionBar from "./ActionBar.astro";
 import Contact from "./Contact.astro";
 import Footer from "./Footer.astro";
 import Header from "./Header.astro";
@@ -24,4 +25,5 @@ const { locale } = Astro.props;
     <Contact locale={locale} />
   </main>
   <Footer locale={locale} />
+  <ActionBar locale={locale} />
 </Base>
