@@ -1,0 +1,16 @@
+---
+import { MapPin, MessageCircle, Phone } from "@lucide/astro";
+import { site } from "../data/site";
+import { t, type Locale } from "../i18n/utils";
+import { mapsLink, mapsQuery, telLink, waLink } from "../lib/links";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const s = t(locale);
+const item = "flex min-h-14 flex-col items-center justify-center gap-0.5 text-base font-bold focus-visible:outline-2 focus-visible:-outline-offset-2";
+---
+<nav aria-label={s.bar.label} data-testid="action-bar" class="fixed inset-x-0 bottom-0 z-30 grid grid-cols-3 border-t border-slate-200 bg-white shadow-[0_-2px_8px_rgb(0_0_0/0.06)] sm:hidden">
+  <a href={telLink(site.phone)} class={`${item} bg-teal-700 text-white focus-visible:outline-white`}><Phone class="h-5 w-5" aria-hidden="true" />{s.bar.call}</a>
+  <a href={waLink(site.whatsapp, s.cta.whatsappMessage)} rel="noopener" class={`${item} text-green-800 focus-visible:outline-green-700`} lang="en"><MessageCircle class="h-5 w-5" aria-hidden="true" />{s.bar.whatsapp}</a>
+  <a href={mapsLink(mapsQuery(site))} rel="noopener" class={`${item} text-slate-900 focus-visible:outline-slate-700`}><MapPin class="h-5 w-5" aria-hidden="true" />{s.bar.directions}</a>
+</nav>

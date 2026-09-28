@@ -1,0 +1,36 @@
+{
+  "name": "sri-arogya-pharmacy",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "test:unit": "vitest run",
+    "test:e2e": "playwright test",
+    "test": "npm run test:unit && npm run build && npm run test:e2e",
+    "lhci": "lhci autorun",
+    "og": "node scripts/og-image.mjs",
+    "deploy": "npm run check:live && npm run build && wrangler deploy",
+    "check:live": "node scripts/check-live.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@lucide/astro": "^1.48.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.3.5",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@axe-core/playwright": "^4.13.0",
+    "@lhci/cli": "^0.15.1",
+    "@playwright/test": "^1.63.0",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.2",
+    "wrangler": "^4.141.0"
+  }
+}

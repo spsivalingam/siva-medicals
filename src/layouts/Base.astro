@@ -1,0 +1,57 @@
+---
+import "../styles/global.css";
+import { Font } from "astro:assets";
+import { site } from "../data/site";
+import { localePath, t, type Locale } from "../i18n/utils";
+import { buildPharmacySchema } from "../lib/schema";
+
+interface Props {
+  locale: Locale;
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const { locale, title, description, noindex = false } = Astro.props;
+const s = t(locale);
+const a = site.address;
+const siteUrl = Astro.site ?? new URL("http://127.0.0.1:4321");
+const pageTitle = title ?? `${site.name[locale]} — ${s.meta.tagline}, ${a.area[locale]}, ${a.city[locale]}`;
+const pageDesc = description ?? `${s.meta.description} ${a.area[locale]}, ${a.city[locale]}.`;
+const canonical = new URL(Astro.url.pathname, siteUrl).href;
+const enUrl = new URL(localePath("en"), siteUrl).href;
+const taUrl = new URL(localePath("ta"), siteUrl).href;
+const schema = buildPharmacySchema(site, locale, new URL(localePath(locale), siteUrl).href);
+---
+<!doctype html>
+<html lang={locale === "ta" ? "ta-IN" : "en-IN"}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDesc} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en-IN" href={enUrl} />
+    <link rel="alternate" hreflang="ta-IN" href={taUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#0f766e" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL("/og-image.png", siteUrl).href} />
+    <meta property="og:locale" content={locale === "ta" ? "ta_IN" : "en_IN"} />
+    <Font cssVariable="--font-noto-sans" preload />
+    <Font cssVariable="--font-noto-tamil" preload={locale === "ta"} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+  </head>
+  <body class="bg-white font-sans text-slate-900 antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:shadow"
+    >{s.a11y.skip}</a>
+    <slot />
+  </body>
+</html>

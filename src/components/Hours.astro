@@ -1,0 +1,67 @@
+---
+import { site } from "../data/site";
+import { t, type Locale } from "../i18n/utils";
+import { formatTime, weekRows } from "../lib/hours";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const s = t(locale);
+const rows = weekRows(site.hours);
+---
+<section id="hours" aria-labelledby="hours-title" class="mx-auto max-w-5xl px-4 py-10 sm:py-14">
+  <div class="flex flex-wrap items-center gap-3">
+    <h2 id="hours-title" class="text-2xl font-bold sm:text-3xl">{s.hours.title}</h2>
+    <p
+      data-open-badge
+      data-testid="open-badge"
+      data-hours={JSON.stringify(site.hours)}
+      data-open-text={s.hours.openNow}
+      data-closed-text={s.hours.closedNow}
+      data-open-until={s.hours.openUntil}
+      data-closed-until={s.hours.closedUntil}
+      data-locale={locale}
+      role="status"
+      hidden
+      class="inline-flex items-center gap-2 rounded-xl px-3 py-1 before:h-2.5 before:w-2.5 before:shrink-0 before:rounded-full before:border-2 before:border-current before:content-[''] data-[state=open]:before:bg-current text-base font-bold data-[state=closed]:bg-red-100 data-[state=closed]:text-red-900 data-[state=open]:bg-green-100 data-[state=open]:text-green-900"
+    ></p>
+  </div>
+  <table data-testid="hours-table" class="mt-6 w-full max-w-md text-left">
+    <tbody>
+      {rows.map((row) => (
+        <tr class="border-b border-slate-200">
+          <th scope="row" class="py-2 pr-4 font-normal text-slate-900">{s.hours.days[row.day]}</th>
+          <td class="py-2 text-slate-700">
+            {row.slots.length === 0
+              ? s.hours.closed
+              : row.slots.map((h) => `${formatTime(h.open, locale)} – ${formatTime(h.close, locale)}`).join(", ")}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <p class="mt-4 text-base text-slate-600">{s.hours.note}</p>
+</section>
+
+<script>
+  import { formatTime, isOpenAt, nextChange, type DayHours } from "../lib/hours";
+
+  const el = document.querySelector<HTMLElement>("[data-open-badge]");
+  if (el) {
+    const hours = JSON.parse(el.dataset.hours ?? "[]") as DayHours[];
+    const update = () => {
+      const open = isOpenAt(new Date(), hours);
+      const at = nextChange(new Date(), hours);
+      const locale = el.dataset.locale === "ta" ? "ta" : "en";
+      const withTime = open ? el.dataset.openUntil : el.dataset.closedUntil;
+      const plain = open ? el.dataset.openText : el.dataset.closedText;
+      el.textContent = (at && withTime ? withTime.replace("{time}", formatTime(at, locale)) : plain) ?? "";
+      el.dataset.state = open ? "open" : "closed";
+      el.hidden = false;
+    };
+    update();
+    // Keep the badge current if the page stays open or is restored from the back/forward cache.
+    setInterval(update, 60_000);
+    addEventListener("pageshow", update);
+    document.addEventListener("visibilitychange", () => document.visibilityState === "visible" && update());
+  }
+</script>

@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-noto-sans), var(--font-noto-tamil), system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Keep anchored sections clear of the sticky header. */
+section[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+/* Tamil vowel signs stack above and below the base letter, so it needs more leading than Latin.
+   Unlayered rules override Tailwind's leading-* from text-* utilities. */
+:lang(ta) :is(p, li, td, th, dt, dd, address) {
+  line-height: 1.75;
+}
+
+:lang(ta) :is(h1, h2, h3) {
+  line-height: 1.4;
+}
+
+:lang(ta) header a > span {
+  line-height: 1.35;
+}

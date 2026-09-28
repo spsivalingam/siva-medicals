@@ -1,0 +1,35 @@
+---
+import { MapPin } from "@lucide/astro";
+import { site } from "../data/site";
+import { t, type Locale } from "../i18n/utils";
+import { mapsLink, mapsQuery } from "../lib/links";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const s = t(locale);
+const a = site.address;
+---
+<section id="location" aria-labelledby="location-title" class="bg-slate-50">
+  <div class="mx-auto grid max-w-5xl gap-6 px-4 py-10 sm:py-14 md:grid-cols-2 md:items-center">
+    <div>
+      <h2 id="location-title" class="text-2xl font-bold sm:text-3xl">{s.location.title}</h2>
+      <address class="mt-4 text-lg not-italic text-slate-800">
+        {site.name[locale]}<br />
+        {a.street[locale]}, {a.area[locale]}<br />
+        {a.city[locale]} – {a.postalCode}<br />
+        {a.region[locale]}
+      </address>
+    </div>
+    <a
+      href={mapsLink(mapsQuery(site))}
+      rel="noopener"
+      class="group relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-2xl border border-slate-200 bg-teal-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
+      style="background-image: linear-gradient(#cbd5e1 1px, transparent 1px), linear-gradient(90deg, #cbd5e1 1px, transparent 1px); background-size: 32px 32px;"
+    >
+      <span class="flex flex-col items-center gap-2 rounded-xl bg-white/90 px-5 py-4 text-center font-bold text-teal-900 shadow group-hover:bg-white">
+        <MapPin class="h-8 w-8 text-red-600" aria-hidden="true" />
+        {s.location.open}
+      </span>
+    </a>
+  </div>
+</section>
