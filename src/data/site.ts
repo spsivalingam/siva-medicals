@@ -3,27 +3,27 @@ import type { DayHours } from "../lib/hours";
 // TODO: replace every placeholder value in this file with the pharmacy's real details.
 // Keep name/address/phone identical to the Google Business Profile listing.
 export const site = {
-  name: { en: "Sri Arogya Pharmacy", ta: "ஸ்ரீ ஆரோக்யா மருந்தகம்" },
-  phone: "+91 98765 43210", // TODO: replace
-  whatsapp: "+91 98765 43210", // TODO: replace — must be a mobile number registered on WhatsApp
-  email: "hello@sriarogya.example", // TODO: replace
+  name: { en: "Siva Medicals", ta: "சிவா மெடிகல்ஸ்" },
+  phone: "+91 99416 00345",
+  whatsapp: "+91 99416 00345",
+  email: "sivamedizone@gmail.com", // TODO: replace
   address: {
-    street: { en: "12, Gandhi Road", ta: "12, காந்தி சாலை" },
-    area: { en: "RS Puram", ta: "ஆர்.எஸ். புரம்" },
-    city: { en: "Coimbatore", ta: "கோயம்புத்தூர்" },
+    street: { en: "49, Jaganathan nagar, 16, Valluvar Salai, Jai Nagar,", ta: "49, ஜெகநாதன் நகர், 16, வள்ளுவர் சாலை, ஜெய் நகர்," },
+    area: { en: "Arumbakkam", ta: "அரும்பாக்கம்" },
+    city: { en: "Chennai", ta: "சென்னை" },
     region: { en: "Tamil Nadu", ta: "தமிழ்நாடு" },
-    postalCode: "641002",
+    postalCode: "600106",
     country: "IN",
   },
   geo: { lat: 11.0082, lng: 76.9497 }, // TODO: replace
   hours: [
-    { day: 1, open: "08:00", close: "22:30" },
-    { day: 2, open: "08:00", close: "22:30" },
-    { day: 3, open: "08:00", close: "22:30" },
-    { day: 4, open: "08:00", close: "22:30" },
-    { day: 5, open: "08:00", close: "22:30" },
-    { day: 6, open: "08:00", close: "22:30" },
-    { day: 0, open: "09:00", close: "13:00" },
+    { day: 1, open: "09:00", close: "23:00" },
+    { day: 2, open: "09:00", close: "23:00" },
+    { day: 3, open: "09:00", close: "23:00" },
+    { day: 4, open: "09:00", close: "23:00" },
+    { day: 5, open: "09:00", close: "23:00" },
+    { day: 6, open: "09:00", close: "23:00" },
+    { day: 0, open: "09:00", close: "23:00" },
   ] satisfies DayHours[] as readonly DayHours[],
   licences: {
     form20: "TN/CBE/20/XXXXX", // TODO: replace
