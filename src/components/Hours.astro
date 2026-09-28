@@ -33,7 +33,9 @@ const rows = weekRows(site.hours);
           <td class="py-2 text-slate-700">
             {row.slots.length === 0
               ? s.hours.closed
-              : row.slots.map((h) => `${formatTime(h.open, locale)} – ${formatTime(h.close, locale)}`).join(", ")}
+              : row.slots.map((h) => (
+                  <span class="block">{formatTime(h.open, locale)} – {formatTime(h.close, locale)}</span>
+                ))}
           </td>
         </tr>
       ))}

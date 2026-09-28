@@ -26,7 +26,6 @@ export const en = {
       { icon: "baby", title: "Mother & baby care", body: "Baby food, diapers, skincare and maternity essentials." },
       { icon: "device", title: "Health devices", body: "BP monitors, glucometers, thermometers and nebulisers." },
       { icon: "truck", title: "Local home delivery", body: "Nearby same-day delivery. Prescription medicines are delivered only after our pharmacist checks a valid prescription." },
-      { icon: "activity", title: "Free BP check", body: "Walk in for a quick blood-pressure reading, no charge." },
     ],
   },
   why: {
@@ -52,7 +51,8 @@ export const en = {
   contact: {
     title: "Contact us",
     lead: "Have a prescription? Send a photo on WhatsApp and we'll confirm availability.",
-    phone: "Phone",
+    phone: "Mobile",
+    landline: "Landline",
     whatsapp: "WhatsApp",
     email: "Email",
     prescription: "Send prescription on WhatsApp",

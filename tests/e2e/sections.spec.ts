@@ -1,5 +1,8 @@
 import { expect, test } from "@playwright/test";
-import { closedInstant, justBeforeClosing, openInstant, phoneDigits, whatsappDigits } from "./site-data";
+import { t } from "../../src/i18n/utils";
+import { formatTime, weekRows } from "../../src/lib/hours";
+import { normalizeIndianPhone } from "../../src/lib/links";
+import { badgeText, closedInstant, justBeforeClosing, midDayBreak, openInstant, phoneDigits, site, whatsappDigits } from "./site-data";
 
 test.describe("contact CTAs", () => {
   for (const path of ["/", "/ta/"]) {
@@ -107,5 +110,35 @@ for (const path of ["/", "/ta/"]) {
     await page.goto(path);
     const text = (await page.locator("#location address").innerText()).replace(/\s+/g, " ");
     expect(text).not.toMatch(/,\s*,/);
+  });
+}
+
+test("badge says closed during a mid-day break and shows when it reopens", async ({ page }) => {
+  const when = midDayBreak();
+  test.skip(!when, "no mid-day break configured");
+  await page.clock.setFixedTime(when!);
+  await page.goto("/");
+  await expect(page.getByTestId("open-badge")).toHaveAttribute("data-state", "closed");
+  await expect(page.getByTestId("open-badge")).toHaveText(badgeText(when!, "en"));
+});
+
+test("hours table lists every slot for days with a break", async ({ page }) => {
+  await page.goto("/");
+  const rows = weekRows(site.hours);
+  const cells = page.getByTestId("hours-table").locator("tbody td");
+  for (const [i, row] of rows.entries()) {
+    for (const slot of row.slots) {
+      await expect(cells.nth(i)).toContainText(formatTime(slot.open, "en"));
+      await expect(cells.nth(i)).toContainText(formatTime(slot.close, "en"));
+    }
+  }
+});
+
+for (const path of ["/", "/ta/"]) {
+  test(`contact lists the landline as a separate call link on ${path}`, async ({ page }) => {
+    await page.goto(path);
+    const link = page.locator(`#contact a[href="tel:+${normalizeIndianPhone(site.landline)}"]`);
+    await expect(link).toBeVisible();
+    await expect(link).toContainText(t(path === "/" ? "en" : "ta").contact.landline);
   });
 }

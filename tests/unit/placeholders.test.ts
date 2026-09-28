@@ -8,6 +8,9 @@ describe("findPlaceholders", () => {
     );
     expect(found).toEqual(expect.arrayContaining(["XXXXX", ".example", "98765 43210", "TODO: replace"]));
   });
+  it("flags the 0000 0000 landline placeholder", () => {
+    expect(findPlaceholders('landline: "044 0000 0000"')).toEqual(["0000 0000"]);
+  });
   it("returns nothing for real-looking data", () => {
     expect(findPlaceholders('form20: "TN/CBE/20/10482", site: "https://sriarogya.in", phone: "+91 94430 11223"')).toEqual([]);
   });

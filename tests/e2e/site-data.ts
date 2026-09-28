@@ -32,3 +32,16 @@ export function badgeText(d: Date, locale: Locale): string {
   const template = open(d) ? h.openUntil : h.closedUntil;
   return at ? template.replace("{time}", formatTime(at, locale)) : open(d) ? h.openNow : h.closedNow;
 }
+
+/** A closed instant with opening hours both earlier and later on the same IST day (e.g. a lunch break). */
+export const midDayBreak = () =>
+  findInstant((d) => {
+    if (open(d)) return false;
+    const dayStart = d.getTime() - (((d.getTime() + 330 * 60_000) % 86_400_000 + 86_400_000) % 86_400_000);
+    let before = false;
+    let after = false;
+    for (let t = dayStart; t < dayStart + 86_400_000; t += 5 * 60_000) {
+      if (open(new Date(t))) (t < d.getTime() ? (before = true) : (after = true));
+    }
+    return before && after;
+  });

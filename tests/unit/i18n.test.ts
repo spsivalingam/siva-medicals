@@ -55,6 +55,9 @@ describe("copy holds no business details", () => {
       expect(s).not.toMatch(/(ஒரு|இரண்டு|மூன்று|நான்கு|ஐந்து|ஆறு|ஏழு) நாட்கள்/);
     }
   });
+  it("services no longer offer a free BP check", () => {
+    for (const d of [en, ta]) expect(d.services.items.map((i) => i.title).join(" ")).not.toMatch(/BP/);
+  });
   it("delivery copy says prescription medicines need a verified prescription", () => {
     const delivery = en.services.items.find((i) => i.icon === "truck")!;
     expect(delivery.body).toMatch(/valid prescription/i);
