@@ -55,6 +55,9 @@ describe("copy holds no business details", () => {
       expect(s).not.toMatch(/(ஒரு|இரண்டு|மூன்று|நான்கு|ஐந்து|ஆறு|ஏழு) நாட்கள்/);
     }
   });
+  it('says "pharmacist", not "registered pharmacist"', () => {
+    for (const s of [...all(en), ...all(ta)]) expect(s).not.toMatch(/registered pharmacist|பதிவு பெற்ற/i);
+  });
   it("services no longer offer a free BP check", () => {
     for (const d of [en, ta]) expect(d.services.items.map((i) => i.title).join(" ")).not.toMatch(/BP/);
   });

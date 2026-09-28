@@ -2,7 +2,7 @@ export const en = {
   meta: {
     tagline: "Trusted neighbourhood pharmacy",
     description:
-      "Genuine medicines, a registered pharmacist on duty, health devices and local home delivery. Call or WhatsApp us.",
+      "Genuine medicines, a pharmacist on duty, health devices and local home delivery. Call or WhatsApp us.",
   },
   a11y: { skip: "Skip to main content" },
   nav: { label: "Main", switchTo: "தமிழ்", switchToLabel: "தமிழ் — View this page in Tamil" },
@@ -20,7 +20,7 @@ export const en = {
   services: {
     title: "What we offer",
     items: [
-      { icon: "pill", title: "Prescription medicines", body: "Dispensed by a registered pharmacist against a valid prescription." },
+      { icon: "pill", title: "Prescription medicines", body: "Dispensed by a pharmacist against a valid prescription." },
       { icon: "heart", title: "OTC & wellness", body: "Vitamins, first aid, personal care and everyday health essentials." },
       { icon: "baby", title: "Mother & baby care", body: "Baby food, diapers, skincare and maternity essentials." },
       { icon: "device", title: "Health devices", body: "BP monitors, glucometers, thermometers and nebulisers." },
