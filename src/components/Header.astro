@@ -1,0 +1,39 @@
+---
+import { Phone } from "@lucide/astro";
+import { site } from "../data/site";
+import { alternatePath, localePath, t, type Locale } from "../i18n/utils";
+import { telLink } from "../lib/links";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const s = t(locale);
+const other: Locale = locale === "en" ? "ta" : "en";
+---
+<header class="sticky top-0 z-20 border-b border-slate-200 bg-white/95 backdrop-blur">
+  <div class="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-2">
+    <a href={localePath(locale)} class="flex min-h-11 items-center gap-2 font-bold text-teal-800">
+      <svg aria-hidden="true" viewBox="0 0 24 24" class="h-7 w-7 shrink-0 fill-teal-700">
+        <path d="M9 2h6v7h7v6h-7v7H9v-7H2V9h7z" />
+      </svg>
+      <span class="leading-tight">{site.name[locale]}</span>
+    </a>
+    <nav aria-label={s.nav.label} class="flex shrink-0 items-center gap-2">
+      <a
+        href={alternatePath(Astro.url, other)}
+        hreflang={other === "ta" ? "ta-IN" : "en-IN"}
+        lang={other === "ta" ? "ta-IN" : "en-IN"}
+        aria-label={s.nav.switchToLabel}
+        data-testid="lang-toggle"
+        class="inline-flex min-h-11 items-center rounded-full border border-teal-700 px-3 text-sm font-semibold text-teal-800 hover:bg-teal-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
+      >{s.nav.switchTo}</a>
+      <a
+        href={telLink(site.phone)}
+        data-testid="header-call"
+        class="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-teal-700 px-3 text-sm font-semibold text-white hover:bg-teal-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
+      >
+        <Phone class="h-4 w-4" aria-hidden="true" />
+        <span class="max-sm:sr-only">{s.cta.call}</span>
+      </a>
+    </nav>
+  </div>
+</header>
