@@ -31,6 +31,7 @@ export const en = {
   why: {
     title: "Why families choose us",
     items: [
+      { icon: "since", title: "Since {year}", body: "A neighbourhood pharmacy families have trusted for decades." },
       { icon: "shield", title: "Genuine stock", body: "Sourced only from licensed distributors." },
       { icon: "badge", title: "Qualified pharmacist", body: "Clear guidance on dosage and timing." },
       { icon: "clock", title: "Open late", body: "Drop in after work. See hours below." },
@@ -60,12 +61,6 @@ export const en = {
     privacy: "This website does not collect personal data. WhatsApp messages are handled under WhatsApp's own terms.",
   },
   footer: {
-    licences: "Licences",
-    form20: "Drug licence (Form 20)",
-    form21: "Drug licence (Form 21)",
-    gstin: "GSTIN",
-    pharmacist: "Registered pharmacist",
-    regNo: "Reg. no.",
     disclaimer:
       "Medicines are dispensed only against a valid prescription where required by law. Information on this site is not medical advice.",
     rights: "All rights reserved.",

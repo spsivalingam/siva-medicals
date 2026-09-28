@@ -1,20 +1,22 @@
 ---
 import Icon from "./Icon.astro";
+import { site } from "../data/site";
 import { t, type Locale } from "../i18n/utils";
 
 interface Props { locale: Locale }
 const s = t(Astro.props.locale);
+const fill = (text: string) => text.replaceAll("{year}", String(site.since));
 ---
 <section aria-labelledby="why-title" class="bg-slate-50">
   <div class="mx-auto max-w-5xl px-4 py-10 sm:py-14">
     <h2 id="why-title" class="text-2xl font-bold sm:text-3xl">{s.why.title}</h2>
-    <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {s.why.items.map((item) => (
         <li class="flex gap-3">
           <Icon name={item.icon} class="mt-0.5 h-6 w-6 shrink-0 text-teal-700" />
           <div>
-            <h3 class="font-bold">{item.title}</h3>
-            <p class="text-slate-700">{item.body}</p>
+            <h3 class="font-bold">{fill(item.title)}</h3>
+            <p class="text-slate-700">{fill(item.body)}</p>
           </div>
         </li>
       ))}

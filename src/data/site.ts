@@ -34,15 +34,7 @@ export const site = {
     { day: 0, open: "09:00", close: "14:00" },
     { day: 0, open: "16:30", close: "23:00" },
   ] satisfies DayHours[] as readonly DayHours[],
-  licences: {
-    form20: "TN/CBE/20/XXXXX", // TODO: replace
-    form21: "TN/CBE/21/XXXXX", // TODO: replace
-    gstin: "33XXXXXXXXXXXZX", // TODO: replace
-    pharmacist: {
-      name: { en: "R. Lakshmi, B.Pharm", ta: "ர. லட்சுமி, பி.பார்ம்" }, // TODO: replace
-      regNo: "TNPC-XXXXX", // TODO: replace
-    },
-  },
+  since: 1999, // year the pharmacy started operating
   priceRange: "₹",
 } as const;
 

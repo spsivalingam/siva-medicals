@@ -73,14 +73,19 @@ test.describe("narrow phone", () => {
   }
 });
 
-test("footer shows licence and pharmacist details", async ({ page }) => {
-  await page.goto("/");
-  const footer = page.locator("footer");
-  await expect(footer).toContainText("Form 20");
-  await expect(footer).toContainText("Form 21");
-  await expect(footer).toContainText("GSTIN");
-  await expect(footer).toContainText("Registered pharmacist");
-});
+for (const path of ["/", "/ta/"]) {
+  test(`footer has no licence block but keeps the disclaimer on ${path}`, async ({ page }) => {
+    await page.goto(path);
+    const footer = page.locator("footer");
+    await expect(footer).not.toContainText(/Form 2[01]|GSTIN|படிவம் 2[01]|XXXXX/);
+    await expect(footer).toContainText(t(path === "/" ? "en" : "ta").footer.disclaimer);
+  });
+
+  test(`why-us says how long the shop has been operating on ${path}`, async ({ page }) => {
+    await page.goto(path);
+    await expect(page.locator('[aria-labelledby="why-title"]')).toContainText(String(site.since));
+  });
+}
 
 for (const id of ["services", "hours", "contact"]) {
   test(`sticky header does not cover #${id} heading after anchor jump`, async ({ page }) => {
