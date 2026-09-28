@@ -147,3 +147,10 @@ for (const path of ["/", "/ta/"]) {
     await expect(link).toContainText(t(path === "/" ? "en" : "ta").contact.landline);
   });
 }
+
+for (const path of ["/", "/ta/"]) {
+  test(`hero has no "registered pharmacist on duty" label on ${path}`, async ({ page }) => {
+    await page.goto(path);
+    await expect(page.locator("main section").first()).not.toContainText(/Registered pharmacist on duty|பதிவு பெற்ற மருந்தாளர் பணியில்/);
+  });
+}

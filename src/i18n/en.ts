@@ -14,7 +14,6 @@ export const en = {
   },
   bar: { label: "Quick contact", call: "Call", whatsapp: "WhatsApp", directions: "Directions" },
   hero: {
-    eyebrow: "Registered pharmacist on duty",
     title: "Genuine medicines, close to home",
     lead: "Prescription medicines, everyday health needs and friendly advice. Call or WhatsApp to check availability before you visit.",
   },
