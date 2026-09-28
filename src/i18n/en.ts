@@ -5,6 +5,7 @@ export const en = {
       "Genuine medicines, a pharmacist on duty, health devices and local home delivery. Call or WhatsApp us.",
   },
   a11y: { skip: "Skip to main content" },
+  brand: { what: "Pharmacy", since: "Since {year}" },
   nav: { label: "Main", switchTo: "தமிழ்", switchToLabel: "தமிழ் — View this page in Tamil" },
   cta: {
     call: "Call now",

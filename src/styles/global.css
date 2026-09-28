@@ -23,6 +23,6 @@ section[id] {
   line-height: 1.4;
 }
 
-:lang(ta) header a > span {
+:lang(ta) [data-testid="brand-name"] {
   line-height: 1.35;
 }

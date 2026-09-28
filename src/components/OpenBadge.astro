@@ -1,0 +1,45 @@
+---
+import { site } from "../data/site";
+import { t, type Locale } from "../i18n/utils";
+
+interface Props { locale: Locale; testid: string; class?: string }
+const { locale, testid, class: extra = "" } = Astro.props;
+const s = t(locale);
+---
+<p
+      data-open-badge
+      data-testid={testid}
+      data-hours={JSON.stringify(site.hours)}
+      data-open-text={s.hours.openNow}
+      data-closed-text={s.hours.closedNow}
+      data-open-until={s.hours.openUntil}
+      data-closed-until={s.hours.closedUntil}
+      data-locale={locale}
+      role="status"
+      hidden
+      class:list={[extra, "inline-flex items-center gap-2 rounded-xl px-3 py-1 before:h-2.5 before:w-2.5 before:shrink-0 before:rounded-full before:border-2 before:border-current before:content-[''] data-[state=open]:before:bg-current text-base font-bold data-[state=closed]:bg-red-100 data-[state=closed]:text-red-900 data-[state=open]:bg-green-100 data-[state=open]:text-green-900"]}
+></p>
+
+<script>
+  import { formatTime, isOpenAt, nextChange, type DayHours } from "../lib/hours";
+
+  // Every badge on the page (hero + hours section) shows the same live IST status.
+  for (const el of document.querySelectorAll<HTMLElement>("[data-open-badge]")) {
+    const hours = JSON.parse(el.dataset.hours ?? "[]") as DayHours[];
+    const update = () => {
+      const open = isOpenAt(new Date(), hours);
+      const at = nextChange(new Date(), hours);
+      const locale = el.dataset.locale === "ta" ? "ta" : "en";
+      const withTime = open ? el.dataset.openUntil : el.dataset.closedUntil;
+      const plain = open ? el.dataset.openText : el.dataset.closedText;
+      el.textContent = (at && withTime ? withTime.replace("{time}", formatTime(at, locale)) : plain) ?? "";
+      el.dataset.state = open ? "open" : "closed";
+      el.hidden = false;
+    };
+    update();
+    // Keep the badge current if the page stays open or is restored from the back/forward cache.
+    setInterval(update, 60_000);
+    addEventListener("pageshow", update);
+    document.addEventListener("visibilitychange", () => document.visibilityState === "visible" && update());
+  }
+</script>

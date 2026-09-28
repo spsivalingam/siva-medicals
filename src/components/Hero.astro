@@ -1,5 +1,6 @@
 ---
 import { MapPin, MessageCircle, Phone } from "@lucide/astro";
+import OpenBadge from "./OpenBadge.astro";
 import { site } from "../data/site";
 import { t, type Locale } from "../i18n/utils";
 import { mapsLink, mapsQuery, telLink, waLink } from "../lib/links";
@@ -12,6 +13,7 @@ const btn =
 ---
 <section class="bg-gradient-to-b from-teal-50 to-white">
   <div class="mx-auto max-w-5xl px-4 pt-8 pb-10 sm:py-20">
+    <OpenBadge locale={locale} testid="hero-open-badge" class="mb-4" />
     <h1 class="max-w-2xl text-3xl leading-tight font-bold text-balance text-slate-900 sm:text-5xl">{s.hero.title}</h1>
     <p class="mt-4 max-w-xl text-lg text-slate-700">{s.hero.lead}</p>
     <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">

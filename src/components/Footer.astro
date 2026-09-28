@@ -7,7 +7,7 @@ const { locale } = Astro.props;
 const s = t(locale);
 const year = new Date().getFullYear();
 ---
-<footer class="bg-slate-900 text-slate-200 max-sm:pb-14">
+<footer class="bg-slate-900 text-slate-200 max-sm:pb-[calc(3.5rem+env(safe-area-inset-bottom))]">
   <div class="mx-auto max-w-5xl px-4 py-10 text-base">
     <p class="text-slate-300">{s.footer.disclaimer}</p>
     <p data-fine-print class="mt-4 text-sm text-slate-400">© {year} {site.name[locale]}. {s.footer.rights}</p>

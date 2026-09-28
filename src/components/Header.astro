@@ -10,12 +10,17 @@ const s = t(locale);
 const other: Locale = locale === "en" ? "ta" : "en";
 ---
 <header class="sticky top-0 z-20 border-b border-slate-200 bg-white/95 backdrop-blur">
-  <div class="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-2">
-    <a href={localePath(locale)} class="flex min-h-11 items-center gap-2 font-bold text-teal-800">
-      <svg aria-hidden="true" viewBox="0 0 24 24" class="h-7 w-7 shrink-0 fill-teal-700">
+  <div class="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-1.5 sm:py-2">
+    <a href={localePath(locale)} class="flex min-h-11 min-w-0 items-center gap-2.5">
+      <svg aria-hidden="true" viewBox="0 0 24 24" data-testid="brand-cross" class="h-8 w-8 shrink-0 fill-green-600 sm:h-9 sm:w-9">
         <path d="M9 2h6v7h7v6h-7v7H9v-7H2V9h7z" />
       </svg>
-      <span class="leading-tight">{site.name[locale]}</span>
+      <span class="flex min-w-0 flex-col">
+        <span data-testid="brand-name" class="text-xl leading-tight font-bold text-teal-800 sm:text-2xl">{site.name[locale]}</span>
+        <span data-testid="brand-tagline" class="text-base leading-snug text-slate-600">
+          <span class="max-sm:hidden">{s.brand.what} · </span>{site.address.area[locale]}<span class="max-sm:hidden"> · {s.brand.since.replace("{year}", String(site.since))}</span>
+        </span>
+      </span>
     </a>
     <nav aria-label={s.nav.label} class="flex shrink-0 items-center gap-2">
       <a
