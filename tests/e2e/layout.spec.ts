@@ -1,9 +1,10 @@
 import { expect, test } from "@playwright/test";
+import { escapeRe, phoneDigits, site } from "./site-data";
 
 test("English home has correct lang, title and one h1", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("html")).toHaveAttribute("lang", "en-IN");
-  await expect(page).toHaveTitle(/Sri Arogya Pharmacy/);
+  await expect(page).toHaveTitle(new RegExp(escapeRe(site.name.en)));
   await expect(page.locator("h1")).toHaveCount(1);
 });
 
@@ -29,7 +30,7 @@ test("JSON-LD parses as a Pharmacy", async ({ page }) => {
   const raw = await page.locator('script[type="application/ld+json"]').textContent();
   const data = JSON.parse(raw ?? "{}");
   expect(data["@type"]).toBe("Pharmacy");
-  expect(data.telephone).toBe("+919876543210");
+  expect(data.telephone).toBe(`+${phoneDigits}`);
 });
 
 test("Tamil page loads the Noto Sans Tamil font", async ({ page }) => {
@@ -43,7 +44,7 @@ test("Tamil page loads the Noto Sans Tamil font", async ({ page }) => {
 
 test("header call button is a tel: link", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByTestId("header-call")).toHaveAttribute("href", "tel:+919876543210");
+  await expect(page.getByTestId("header-call")).toHaveAttribute("href", `tel:+${phoneDigits}`);
 });
 
 test("no console errors on either page", async ({ page }) => {

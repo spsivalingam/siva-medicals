@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { badgeText, closedInstant, openInstant, phoneDigits, whatsappDigits } from "./site-data";
 
 const filled = (el: Element) => {
   const bg = getComputedStyle(el).backgroundColor;
@@ -12,25 +13,33 @@ test("hero has exactly one filled primary button (Call)", async ({ page }) => {
   expect(await page.getByTestId("cta-directions").evaluate(filled)).toBe(false);
 });
 
-test("badge shows closing time and a status dot while open", async ({ page }) => {
-  await page.clock.setFixedTime(new Date("2026-09-28T05:00:00Z")); // Mon 10:30 IST
+test("badge shows next change time and a status dot while open", async ({ page }) => {
+  const when = openInstant();
+  test.skip(!when, "shop never opens");
+  await page.clock.setFixedTime(when!);
   await page.goto("/");
   const badge = page.getByTestId("open-badge");
-  await expect(badge).toHaveText("Open now · closes 10:30 pm");
+  await expect(badge).toHaveText(badgeText(when!, "en"));
   const dot = await badge.evaluate((el) => getComputedStyle(el, "::before").width);
   expect(dot).toBe("10px");
 });
 
 test("Tamil badge puts the time first", async ({ page }) => {
-  await page.clock.setFixedTime(new Date("2026-09-28T05:00:00Z"));
+  const when = openInstant();
+  test.skip(!when, "shop never opens");
+  await page.clock.setFixedTime(when!);
   await page.goto("/ta/");
-  await expect(page.getByTestId("open-badge")).toHaveText("திறந்துள்ளது · இரவு 10:30 வரை");
+  const text = badgeText(when!, "ta");
+  await expect(page.getByTestId("open-badge")).toHaveText(text);
+  if (text.includes("·")) expect(text).toMatch(/வரை$/);
 });
 
 test("closed badge shows next opening time", async ({ page }) => {
-  await page.clock.setFixedTime(new Date("2026-09-27T10:00:00Z")); // Sun 15:30 IST
+  const when = closedInstant();
+  test.skip(!when, "shop is open around the clock");
+  await page.clock.setFixedTime(when!);
   await page.goto("/");
-  await expect(page.getByTestId("open-badge")).toHaveText("Closed now · opens 8:00 am");
+  await expect(page.getByTestId("open-badge")).toHaveText(badgeText(when!, "en"));
 });
 
 test.describe("phone layout", () => {
@@ -42,8 +51,8 @@ test.describe("phone layout", () => {
     await expect(bar).toBeVisible();
     const links = bar.locator("a");
     await expect(links).toHaveCount(3);
-    await expect(links.nth(0)).toHaveAttribute("href", "tel:+919876543210");
-    await expect(links.nth(1)).toHaveAttribute("href", /^https:\/\/wa\.me\/919876543210/);
+    await expect(links.nth(0)).toHaveAttribute("href", `tel:+${phoneDigits}`);
+    await expect(links.nth(1)).toHaveAttribute("href", new RegExp(`^https://wa\\.me/${whatsappDigits}`));
     await expect(links.nth(2)).toHaveAttribute("href", /^https:\/\/www\.google\.com\/maps/);
     for (const i of [0, 1, 2]) expect((await links.nth(i).boundingBox())!.height).toBeGreaterThanOrEqual(48);
   });

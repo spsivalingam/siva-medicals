@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { site } from "../../src/data/site";
+import { normalizeIndianPhone } from "../../src/lib/links";
 import { buildPharmacySchema } from "../../src/lib/schema";
 
 describe("buildPharmacySchema", () => {
@@ -13,23 +14,23 @@ describe("buildPharmacySchema", () => {
   });
 
   it("has E.164 telephone and postal address", () => {
-    expect(s.telephone).toBe("+919876543210");
+    expect(s.telephone).toBe(`+${normalizeIndianPhone(site.phone)}`);
     expect(s.address).toMatchObject({
       "@type": "PostalAddress",
-      postalCode: "641002",
+      postalCode: site.address.postalCode,
       addressCountry: "IN",
-      addressLocality: "Coimbatore",
+      addressLocality: site.address.city.en,
     });
   });
 
   it("has geo and one opening spec per configured slot", () => {
-    expect(s.geo).toEqual({ "@type": "GeoCoordinates", latitude: 11.0082, longitude: 76.9497 });
+    expect(s.geo).toEqual({ "@type": "GeoCoordinates", latitude: site.geo.lat, longitude: site.geo.lng });
     expect(s.openingHoursSpecification).toHaveLength(site.hours.length);
     expect(s.openingHoursSpecification[0]).toEqual({
       "@type": "OpeningHoursSpecification",
-      dayOfWeek: "https://schema.org/Monday",
-      opens: "08:00",
-      closes: "22:30",
+      dayOfWeek: `https://schema.org/${["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][site.hours[0].day]}`,
+      opens: site.hours[0].open,
+      closes: site.hours[0].close,
     });
   });
 

@@ -1,16 +1,17 @@
 import { expect, test } from "@playwright/test";
+import { closedInstant, justBeforeClosing, openInstant, phoneDigits, whatsappDigits } from "./site-data";
 
 test.describe("contact CTAs", () => {
   for (const path of ["/", "/ta/"]) {
     test(`CTAs are correct on ${path}`, async ({ page }) => {
       await page.goto(path);
-      await expect(page.getByTestId("cta-call")).toHaveAttribute("href", "tel:+919876543210");
-      await expect(page.getByTestId("cta-whatsapp")).toHaveAttribute("href", /^https:\/\/wa\.me\/919876543210\?text=/);
+      await expect(page.getByTestId("cta-call")).toHaveAttribute("href", `tel:+${phoneDigits}`);
+      await expect(page.getByTestId("cta-whatsapp")).toHaveAttribute("href", new RegExp(`^https://wa\\.me/${whatsappDigits}\\?text=`));
       await expect(page.getByTestId("cta-directions")).toHaveAttribute(
         "href",
         /^https:\/\/www\.google\.com\/maps\/search\/\?api=1&query=/,
       );
-      await expect(page.getByTestId("cta-prescription")).toHaveAttribute("href", /^https:\/\/wa\.me\/919876543210\?text=/);
+      await expect(page.getByTestId("cta-prescription")).toHaveAttribute("href", new RegExp(`^https://wa\\.me/${whatsappDigits}\\?text=`));
       const box = await page.getByTestId("cta-call").boundingBox();
       expect(box!.height).toBeGreaterThanOrEqual(44);
     });
@@ -28,16 +29,20 @@ test("hours table lists all 7 days", async ({ page }) => {
   await expect(page.getByTestId("hours-table").locator("tbody tr")).toHaveCount(7);
 });
 
-test("badge says open on Monday 10:30 IST", async ({ page }) => {
-  await page.clock.setFixedTime(new Date("2026-09-28T05:00:00Z"));
+test("badge says open during opening hours", async ({ page }) => {
+  const when = openInstant();
+  test.skip(!when, "shop never opens");
+  await page.clock.setFixedTime(when!);
   await page.goto("/");
   const badge = page.getByTestId("open-badge");
   await expect(badge).toBeVisible();
   await expect(badge).toHaveAttribute("data-state", "open");
 });
 
-test("badge says closed on Sunday 15:30 IST", async ({ page }) => {
-  await page.clock.setFixedTime(new Date("2026-09-27T10:00:00Z"));
+test("badge says closed outside opening hours (Tamil)", async ({ page }) => {
+  const when = closedInstant();
+  test.skip(!when, "shop is open around the clock");
+  await page.clock.setFixedTime(when!);
   await page.goto("/ta/");
   await expect(page.getByTestId("open-badge")).toHaveAttribute("data-state", "closed");
   await expect(page.getByTestId("open-badge")).toContainText("மூடப்பட்டுள்ளது");
@@ -88,8 +93,9 @@ for (const id of ["services", "hours", "contact"]) {
 }
 
 test("badge flips to closed when the page stays open past closing time", async ({ page }) => {
-  // Monday 22:25 IST = 16:55 UTC; store closes 22:30 IST
-  await page.clock.install({ time: new Date("2026-09-28T16:55:00Z") });
+  const when = justBeforeClosing();
+  test.skip(!when, "shop never closes");
+  await page.clock.install({ time: when! });
   await page.goto("/");
   await expect(page.getByTestId("open-badge")).toHaveAttribute("data-state", "open");
   await page.clock.runFor(6 * 60_000);
