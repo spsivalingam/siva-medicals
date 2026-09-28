@@ -15,7 +15,7 @@ export const site = {
     postalCode: "600106",
     country: "IN",
   },
-  geo: { lat: 11.0082, lng: 76.9497 }, // TODO: replace
+  geo: { lat: 13.07287000353856, lng: 80.2079675720745 },
   hours: [
     { day: 1, open: "09:00", close: "23:00" },
     { day: 2, open: "09:00", close: "23:00" },
