@@ -45,9 +45,16 @@ const rows = weekRows(site.hours);
   const el = document.querySelector<HTMLElement>("[data-open-badge]");
   if (el) {
     const hours = JSON.parse(el.dataset.hours ?? "[]") as DayHours[];
-    const open = isOpenAt(new Date(), hours);
-    el.textContent = (open ? el.dataset.openText : el.dataset.closedText) ?? "";
-    el.dataset.state = open ? "open" : "closed";
-    el.hidden = false;
+    const update = () => {
+      const open = isOpenAt(new Date(), hours);
+      el.textContent = (open ? el.dataset.openText : el.dataset.closedText) ?? "";
+      el.dataset.state = open ? "open" : "closed";
+      el.hidden = false;
+    };
+    update();
+    // Keep the badge current if the page stays open or is restored from the back/forward cache.
+    setInterval(update, 60_000);
+    addEventListener("pageshow", update);
+    document.addEventListener("visibilitychange", () => document.visibilityState === "visible" && update());
   }
 </script>

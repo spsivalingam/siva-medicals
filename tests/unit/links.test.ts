@@ -39,3 +39,12 @@ describe("links", () => {
     );
   });
 });
+
+describe("waLink requires a mobile number", () => {
+  it("rejects a landline for WhatsApp with a clear message", () => {
+    expect(() => waLink("0422 2345678")).toThrow(/WhatsApp needs an Indian mobile number/);
+  });
+  it("still allows a landline for tel:", () => {
+    expect(telLink("0422 2345678")).toBe("tel:+914222345678");
+  });
+});

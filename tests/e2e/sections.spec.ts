@@ -86,3 +86,12 @@ for (const id of ["services", "hours", "contact"]) {
     expect(heading!.y).toBeGreaterThanOrEqual(header!.y + header!.height);
   });
 }
+
+test("badge flips to closed when the page stays open past closing time", async ({ page }) => {
+  // Monday 22:25 IST = 16:55 UTC; store closes 22:30 IST
+  await page.clock.install({ time: new Date("2026-09-28T16:55:00Z") });
+  await page.goto("/");
+  await expect(page.getByTestId("open-badge")).toHaveAttribute("data-state", "open");
+  await page.clock.runFor(6 * 60_000);
+  await expect(page.getByTestId("open-badge")).toHaveAttribute("data-state", "closed");
+});

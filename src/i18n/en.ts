@@ -24,7 +24,7 @@ export const en = {
       { icon: "heart", title: "OTC & wellness", body: "Vitamins, first aid, personal care and everyday health essentials." },
       { icon: "baby", title: "Mother & baby care", body: "Baby food, diapers, skincare and maternity essentials." },
       { icon: "device", title: "Health devices", body: "BP monitors, glucometers, thermometers and nebulisers." },
-      { icon: "truck", title: "Local home delivery", body: "Order on WhatsApp and we deliver nearby the same day." },
+      { icon: "truck", title: "Local home delivery", body: "Nearby same-day delivery. Prescription medicines are delivered only after our pharmacist checks a valid prescription." },
       { icon: "activity", title: "Free BP check", body: "Walk in for a quick blood-pressure reading, no charge." },
     ],
   },
@@ -33,7 +33,7 @@ export const en = {
     items: [
       { icon: "shield", title: "Genuine stock", body: "Sourced only from licensed distributors." },
       { icon: "badge", title: "Qualified pharmacist", body: "Clear guidance on dosage and timing." },
-      { icon: "clock", title: "Open late", body: "Open until 10:30 pm, six days a week." },
+      { icon: "clock", title: "Open late", body: "Open into the evening, six days a week. See hours below." },
       { icon: "smile", title: "Friendly service", body: "We speak Tamil and English." },
     ],
   },

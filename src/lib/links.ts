@@ -11,7 +11,11 @@ export function normalizeIndianPhone(input: string): string {
 export const telLink = (phone: string): string => `tel:+${normalizeIndianPhone(phone)}`;
 
 export function waLink(phone: string, message?: string): string {
-  const base = `https://wa.me/${normalizeIndianPhone(phone)}`;
+  const number = normalizeIndianPhone(phone);
+  if (!/^91[6-9]\d{9}$/.test(number)) {
+    throw new Error(`WhatsApp needs an Indian mobile number (starting 6-9), got "${phone}"`);
+  }
+  const base = `https://wa.me/${number}`;
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
 

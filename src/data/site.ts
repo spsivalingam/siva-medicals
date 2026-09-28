@@ -5,7 +5,7 @@ import type { DayHours } from "../lib/hours";
 export const site = {
   name: { en: "Sri Arogya Pharmacy", ta: "ஸ்ரீ ஆரோக்யா மருந்தகம்" },
   phone: "+91 98765 43210", // TODO: replace
-  whatsapp: "+91 98765 43210", // TODO: replace
+  whatsapp: "+91 98765 43210", // TODO: replace — must be a mobile number registered on WhatsApp
   email: "hello@sriarogya.example", // TODO: replace
   address: {
     street: { en: "12, Gandhi Road", ta: "12, காந்தி சாலை" },

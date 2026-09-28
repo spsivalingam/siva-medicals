@@ -42,3 +42,16 @@ describe("utils", () => {
     expect(alternatePath(new URL("https://x.in/ta"), "en")).toBe("/");
   });
 });
+
+describe("copy holds no business details", () => {
+  const all = (d: unknown): string[] =>
+    typeof d === "string" ? [d] : d && typeof d === "object" ? Object.values(d).flatMap(all) : [];
+  it("no clock times in UI copy (hours live in site.ts)", () => {
+    for (const s of [...all(en), ...all(ta)]) expect(s).not.toMatch(/\d{1,2}[:.]\d{2}/);
+  });
+  it("delivery copy says prescription medicines need a verified prescription", () => {
+    const delivery = en.services.items.find((i) => i.icon === "truck")!;
+    expect(delivery.body).toMatch(/valid prescription/i);
+    expect(ta.services.items.find((i) => i.icon === "truck")!.body).toMatch(/மருந்துச் சீட்ட/);
+  });
+});

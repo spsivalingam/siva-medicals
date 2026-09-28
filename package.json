@@ -14,7 +14,8 @@
     "test": "npm run test:unit && npm run build && npm run test:e2e",
     "lhci": "lhci autorun",
     "og": "node scripts/og-image.mjs",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "npm run check:live && npm run build && wrangler deploy",
+    "check:live": "node scripts/check-live.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
