@@ -73,3 +73,16 @@ test("footer shows licence and pharmacist details", async ({ page }) => {
   await expect(footer).toContainText("GSTIN");
   await expect(footer).toContainText("Registered pharmacist");
 });
+
+for (const id of ["services", "hours", "contact"]) {
+  test(`sticky header does not cover #${id} heading after anchor jump`, async ({ page }) => {
+    await page.goto(`/#${id}`);
+    await page.evaluate((i) => {
+      document.documentElement.style.scrollBehavior = "auto";
+      document.getElementById(i)!.scrollIntoView();
+    }, id);
+    const header = await page.locator("header").boundingBox();
+    const heading = await page.locator(`#${id} h2`).boundingBox();
+    expect(heading!.y).toBeGreaterThanOrEqual(header!.y + header!.height);
+  });
+}
