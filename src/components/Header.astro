@@ -24,12 +24,12 @@ const other: Locale = locale === "en" ? "ta" : "en";
         lang={other === "ta" ? "ta-IN" : "en-IN"}
         aria-label={s.nav.switchToLabel}
         data-testid="lang-toggle"
-        class="inline-flex min-h-11 items-center rounded-full border border-teal-700 px-3 text-sm font-semibold text-teal-800 hover:bg-teal-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
+        class="inline-flex min-h-11 items-center rounded-full border border-teal-700 px-3 text-base font-bold text-teal-800 hover:bg-teal-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
       >{s.nav.switchTo}</a>
       <a
         href={telLink(site.phone)}
         data-testid="header-call"
-        class="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-teal-700 px-3 text-sm font-semibold text-white hover:bg-teal-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
+        class="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-teal-700 px-3 text-base font-bold text-white hover:bg-teal-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
       >
         <Phone class="h-4 w-4" aria-hidden="true" />
         <span class="max-sm:sr-only">{s.cta.call}</span>

@@ -36,9 +36,10 @@ describe("isOpenAt", () => {
 describe("formatTime", () => {
   const norm = (s: string) => s.replace(/\s/g, " ").toLowerCase();
   it("formats English 12-hour", () => expect(norm(formatTime("22:30", "en"))).toBe("10:30 pm"));
-  it("formats Tamil with a Tamil-locale string", () => {
-    const out = formatTime("08:00", "ta");
-    expect(out).toContain("8:00");
+  it("formats Tamil with day-period words, not AM/PM", () => {
+    expect(norm(formatTime("08:00", "ta"))).toBe("காலை 8:00");
+    expect(norm(formatTime("13:00", "ta"))).toBe("மதியம் 1:00");
+    expect(norm(formatTime("22:30", "ta"))).toBe("இரவு 10:30");
   });
 });
 

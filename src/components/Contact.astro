@@ -16,7 +16,7 @@ const row = "flex min-h-11 items-center gap-3 rounded-lg px-2 hover:bg-slate-50 
     href={waLink(site.whatsapp, s.contact.prescriptionMessage)}
     data-testid="cta-prescription"
     rel="noopener"
-    class="mt-6 inline-flex min-h-12 items-center gap-2 rounded-full bg-green-700 px-5 font-semibold text-white hover:bg-green-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700"
+    class="mt-6 inline-flex min-h-12 items-center gap-2 rounded-full bg-green-700 px-5 font-bold text-white hover:bg-green-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700"
   >
     <MessageCircle class="h-5 w-5" aria-hidden="true" />{s.contact.prescription}
   </a>
@@ -25,5 +25,5 @@ const row = "flex min-h-11 items-center gap-3 rounded-lg px-2 hover:bg-slate-50 
     <li><a href={waLink(site.whatsapp)} rel="noopener" class={row}><MessageCircle class="h-5 w-5 text-green-700" aria-hidden="true" /><span class="sr-only">{s.contact.whatsapp}: </span>{site.whatsapp}</a></li>
     <li><a href={`mailto:${site.email}`} class={`${row} break-all`}><Mail class="h-5 w-5 shrink-0 text-teal-700" aria-hidden="true" /><span class="sr-only">{s.contact.email}: </span>{site.email}</a></li>
   </ul>
-  <p class="mt-6 max-w-xl text-sm text-slate-600">{s.contact.privacy}</p>
+  <p class="mt-6 max-w-xl text-base text-slate-600">{s.contact.privacy}</p>
 </section>

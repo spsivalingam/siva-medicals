@@ -27,12 +27,14 @@ export function isOpenAt(date: Date, hours: readonly DayHours[]): boolean {
 
 export function formatTime(hhmm: string, locale: "en" | "ta"): string {
   const [h, m] = hhmm.split(":").map(Number);
-  return new Intl.DateTimeFormat(locale === "ta" ? "ta-IN" : "en-IN", {
-    hour: "numeric",
-    minute: "2-digit",
-    hour12: true,
-    timeZone: "UTC",
-  }).format(new Date(Date.UTC(2000, 0, 1, h, m)));
+  // Tamil readers expect day-period words (காலை / மதியம் / மாலை / இரவு), not AM/PM.
+  const options: Intl.DateTimeFormatOptions =
+    locale === "ta"
+      ? { hour: "numeric", minute: "2-digit", dayPeriod: "short", timeZone: "UTC" }
+      : { hour: "numeric", minute: "2-digit", hour12: true, timeZone: "UTC" };
+  return new Intl.DateTimeFormat(locale === "ta" ? "ta-IN" : "en-IN", options).format(
+    new Date(Date.UTC(2000, 0, 1, h, m)),
+  );
 }
 
 const WEEK_ORDER = [1, 2, 3, 4, 5, 6, 0] as const;

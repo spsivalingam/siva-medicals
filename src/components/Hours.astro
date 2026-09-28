@@ -19,14 +19,14 @@ const rows = weekRows(site.hours);
       data-closed-text={s.hours.closedNow}
       role="status"
       hidden
-      class="inline-flex rounded-full px-3 py-1 text-sm font-semibold data-[state=closed]:bg-red-100 data-[state=closed]:text-red-900 data-[state=open]:bg-green-100 data-[state=open]:text-green-900"
+      class="inline-flex rounded-full px-3 py-1 text-base font-bold data-[state=closed]:bg-red-100 data-[state=closed]:text-red-900 data-[state=open]:bg-green-100 data-[state=open]:text-green-900"
     ></p>
   </div>
   <table data-testid="hours-table" class="mt-6 w-full max-w-md text-left">
     <tbody>
       {rows.map((row) => (
         <tr class="border-b border-slate-200">
-          <th scope="row" class="py-2 pr-4 font-medium">{s.hours.days[row.day]}</th>
+          <th scope="row" class="py-2 pr-4 font-normal text-slate-900">{s.hours.days[row.day]}</th>
           <td class="py-2 text-slate-700">
             {row.slots.length === 0
               ? s.hours.closed
@@ -36,7 +36,7 @@ const rows = weekRows(site.hours);
       ))}
     </tbody>
   </table>
-  <p class="mt-4 text-sm text-slate-600">{s.hours.note}</p>
+  <p class="mt-4 text-base text-slate-600">{s.hours.note}</p>
 </section>
 
 <script>
