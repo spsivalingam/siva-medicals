@@ -2,11 +2,12 @@
 import { Mail, MessageCircle, Phone, PhoneCall } from "@lucide/astro";
 import { site } from "../data/site";
 import { t, type Locale } from "../i18n/utils";
-import { telLink, waLink } from "../lib/links";
+import { normalizeIndianPhone, telLink, waLink } from "../lib/links";
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const s = t(locale);
+const sameNumber = normalizeIndianPhone(site.phone) === normalizeIndianPhone(site.whatsapp);
 const label = "block text-base text-slate-600";
 const row = "flex min-h-12 items-center gap-3 rounded-lg px-2 py-1 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-teal-700";
 ---
@@ -22,9 +23,18 @@ const row = "flex min-h-12 items-center gap-3 rounded-lg px-2 py-1 hover:bg-slat
     <MessageCircle class="h-5 w-5" aria-hidden="true" />{s.contact.prescription}
   </a>
   <ul class="mt-8 grid max-w-md gap-1 text-lg">
-    <li><a href={telLink(site.phone)} class={row}><Phone class="h-5 w-5 shrink-0 text-teal-700" aria-hidden="true" /><span><span class={label}>{s.contact.phone}</span>{site.phone}</span></a></li>
+    <li class="flex flex-wrap items-center gap-x-2 gap-y-1">
+      <a href={telLink(site.phone)} class={`${row} min-w-0 grow`}><Phone class="h-5 w-5 shrink-0 text-teal-700" aria-hidden="true" /><span><span class={label}>{sameNumber ? s.contact.mobileWhatsapp : s.contact.phone}</span>{site.phone}</span></a>
+      {sameNumber && (
+        <a href={waLink(site.whatsapp)} rel="noopener" aria-label={`${s.contact.whatsappOn} ${site.whatsapp}`} class="inline-flex min-h-12 min-w-12 shrink-0 items-center justify-center gap-2 rounded-full border-2 border-green-700 px-3 font-bold sm:px-4 text-green-800 hover:bg-green-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700">
+          <MessageCircle class="h-5 w-5" aria-hidden="true" /><span class="max-sm:hidden">{s.contact.whatsappOn}</span>
+        </a>
+      )}
+    </li>
     <li><a href={telLink(site.landline)} class={row}><PhoneCall class="h-5 w-5 shrink-0 text-teal-700" aria-hidden="true" /><span><span class={label}>{s.contact.landline}</span>{site.landline}</span></a></li>
-    <li><a href={waLink(site.whatsapp)} rel="noopener" class={row}><MessageCircle class="h-5 w-5 shrink-0 text-green-700" aria-hidden="true" /><span><span class={label}>{s.contact.whatsapp}</span>{site.whatsapp}</span></a></li>
+    {!sameNumber && (
+      <li><a href={waLink(site.whatsapp)} rel="noopener" class={row}><MessageCircle class="h-5 w-5 shrink-0 text-green-700" aria-hidden="true" /><span><span class={label}>{s.contact.whatsapp}</span>{site.whatsapp}</span></a></li>
+    )}
     <li><a href={`mailto:${site.email}`} class={row}><Mail class="h-5 w-5 shrink-0 text-teal-700" aria-hidden="true" /><span class="break-all"><span class={label}>{s.contact.email}</span>{site.email}</span></a></li>
   </ul>
   <p class="mt-6 max-w-xl text-base text-slate-600">{s.contact.privacy}</p>

@@ -6,10 +6,10 @@ export const site = {
   name: { en: "Siva Medicals", ta: "சிவா மெடிகல்ஸ்" },
   phone: "+91 99416 00345",
   whatsapp: "+91 99416 00345",
-  landline: "044 0000 0000", // TODO: replace with the landline number
+  landline: "044 23637656",
   email: "sivamedizone@gmail.com", // TODO: replace
   address: {
-    street: { en: "49, Jaganathan nagar, 16, Valluvar Salai, Jai Nagar", ta: "49, ஜெகநாதன் நகர், 16, வள்ளுவர் சாலை, ஜெய் நகர்" },
+    street: { en: "49, Jaganathan Nagar, 16, Valluvar Salai, Jai Nagar", ta: "49, ஜெகநாதன் நகர், 16, வள்ளுவர் சாலை, ஜெய் நகர்" },
     area: { en: "Arumbakkam", ta: "அரும்பாக்கம்" },
     city: { en: "Chennai", ta: "சென்னை" },
     region: { en: "Tamil Nadu", ta: "தமிழ்நாடு" },

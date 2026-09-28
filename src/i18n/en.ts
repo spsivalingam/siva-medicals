@@ -53,6 +53,8 @@ export const en = {
     lead: "Have a prescription? Send a photo on WhatsApp and we'll confirm availability.",
     phone: "Mobile",
     landline: "Landline",
+    mobileWhatsapp: "Mobile · WhatsApp",
+    whatsappOn: "WhatsApp",
     whatsapp: "WhatsApp",
     email: "Email",
     prescription: "Send prescription on WhatsApp",

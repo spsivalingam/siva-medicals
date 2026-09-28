@@ -154,3 +154,20 @@ for (const path of ["/", "/ta/"]) {
     await expect(page.locator("main section").first()).not.toContainText(/Registered pharmacist on duty|பதிவு பெற்ற மருந்தாளர் பணியில்/);
   });
 }
+
+for (const path of ["/", "/ta/"]) {
+  test(`contact shows a shared mobile/WhatsApp number once, with both actions, on ${path}`, async ({ page }) => {
+    await page.goto(path);
+    const list = page.locator("#contact ul");
+    expect((await list.innerText()).split(site.phone).length - 1).toBe(1);
+    await expect(list.locator(`a[href="tel:+${normalizeIndianPhone(site.phone)}"]`)).toHaveCount(1);
+    await expect(list.locator(`a[href^="https://wa.me/${normalizeIndianPhone(site.whatsapp)}"]`)).toHaveCount(1);
+    for (const a of await list.locator("a").all()) expect((await a.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+  });
+}
+
+test("street names are capitalised", async ({ page }) => {
+  await page.goto("/");
+  const text = await page.locator("#location address").innerText();
+  expect(text).not.toMatch(/\b(nagar|salai|road|street)\b/);
+});
