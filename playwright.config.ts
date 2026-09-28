@@ -10,7 +10,7 @@ export default defineConfig({
     { name: "mobile", use: { ...devices["Pixel 7"] } },
   ],
   webServer: {
-    command: "npx astro preview --host 127.0.0.1 --port 4321",
+    command: "npx astro preview --ignore-lock --host 127.0.0.1 --port 4321",
     url: "http://127.0.0.1:4321",
     reuseExistingServer: !process.env.CI,
   },
