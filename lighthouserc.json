@@ -5,7 +5,7 @@
         "http://localhost/index.html",
         "http://localhost/ta/index.html"
       ],
-      "numberOfRuns": 1,
+      "numberOfRuns": 3,
       "staticDistDir": "./dist"
     },
     "assert": {
@@ -46,7 +46,8 @@
             "maxNumericValue": 307200
           }
         ]
-      }
+      },
+      "aggregationMethod": "optimistic"
     },
     "upload": {
       "target": "filesystem",
