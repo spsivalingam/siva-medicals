@@ -1,0 +1,21 @@
+---
+import Icon from "./Icon.astro";
+import { t, type Locale } from "../i18n/utils";
+
+interface Props { locale: Locale }
+const s = t(Astro.props.locale);
+---
+<section id="services" aria-labelledby="services-title" class="mx-auto max-w-5xl px-4 py-14">
+  <h2 id="services-title" class="text-2xl font-bold sm:text-3xl">{s.services.title}</h2>
+  <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {s.services.items.map((item) => (
+      <li class="rounded-2xl border border-slate-200 p-5">
+        <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-teal-50 text-teal-700">
+          <Icon name={item.icon} />
+        </span>
+        <h3 class="mt-4 text-lg font-semibold">{item.title}</h3>
+        <p class="mt-1 text-slate-700">{item.body}</p>
+      </li>
+    ))}
+  </ul>
+</section>

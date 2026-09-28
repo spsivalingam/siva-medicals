@@ -1,7 +1,13 @@
 ---
 import Base from "../layouts/Base.astro";
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
 import Header from "./Header.astro";
-import { site } from "../data/site";
+import Hero from "./Hero.astro";
+import Hours from "./Hours.astro";
+import Location from "./Location.astro";
+import Services from "./Services.astro";
+import WhyUs from "./WhyUs.astro";
 import type { Locale } from "../i18n/utils";
 
 interface Props { locale: Locale }
@@ -10,6 +16,12 @@ const { locale } = Astro.props;
 <Base locale={locale}>
   <Header locale={locale} />
   <main id="main">
-    <h1 class="px-4 py-10 text-3xl font-bold">{site.name[locale]}</h1>
+    <Hero locale={locale} />
+    <Services locale={locale} />
+    <WhyUs locale={locale} />
+    <Hours locale={locale} />
+    <Location locale={locale} />
+    <Contact locale={locale} />
   </main>
+  <Footer locale={locale} />
 </Base>

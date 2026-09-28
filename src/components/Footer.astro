@@ -1,0 +1,24 @@
+---
+import { site } from "../data/site";
+import { t, type Locale } from "../i18n/utils";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const s = t(locale);
+const l = site.licences;
+const year = new Date().getFullYear();
+---
+<footer class="bg-slate-900 text-slate-200">
+  <div class="mx-auto max-w-5xl px-4 py-10 text-sm">
+    <h2 class="text-base font-semibold text-white">{s.footer.licences}</h2>
+    <dl class="mt-3 grid gap-x-6 gap-y-1 sm:grid-cols-[auto_1fr]">
+      <dt>{s.footer.form20}</dt><dd class="font-mono">{l.form20}</dd>
+      <dt>{s.footer.form21}</dt><dd class="font-mono">{l.form21}</dd>
+      <dt>{s.footer.gstin}</dt><dd class="font-mono">{l.gstin}</dd>
+      <dt>{s.footer.pharmacist}</dt>
+      <dd>{l.pharmacist.name[locale]} · {s.footer.regNo} <span class="font-mono">{l.pharmacist.regNo}</span></dd>
+    </dl>
+    <p class="mt-6 text-slate-300">{s.footer.disclaimer}</p>
+    <p class="mt-4 text-slate-400">© {year} {site.name[locale]}. {s.footer.rights}</p>
+  </div>
+</footer>
