@@ -1,5 +1,5 @@
 {
-  "name": "sri-arogya-pharmacy",
+  "name": "siva-medicals",
   "private": true,
   "type": "module",
   "engines": {
@@ -13,7 +13,7 @@
     "test:e2e": "playwright test",
     "test": "npm run test:unit && npm run build && npm run test:e2e",
     "lhci": "lhci autorun",
-    "og": "node scripts/og-image.mjs",
+    "og": "node --experimental-strip-types --no-warnings scripts/og-image.mjs",
     "deploy": "npm run check:live && npm run build && wrangler deploy",
     "check:live": "node scripts/check-live.mjs"
   },

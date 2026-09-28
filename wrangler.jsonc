@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "sri-arogya-pharmacy",
+  "name": "siva-medicals",
   "compatibility_date": "2026-09-27",
   "assets": {
     "directory": "./dist",

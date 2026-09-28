@@ -1,4 +1,4 @@
-# Sri Arogya Pharmacy website
+# Siva Medicals website
 
 Bilingual (English + தமிழ்) static website for a neighbourhood pharmacy. Built with Astro 7 and Tailwind CSS 4; ships almost no JavaScript.
 

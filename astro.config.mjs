@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   // TODO: replace with the real domain once deployed
-  site: "https://sri-arogya-pharmacy.pages.example",
+  site: "https://siva-medicals.pages.example",
   i18n: {
     locales: ["en", "ta"],
     defaultLocale: "en",
