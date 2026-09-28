@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-noto-sans), var(--font-noto-tamil), system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
