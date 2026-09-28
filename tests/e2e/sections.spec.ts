@@ -101,3 +101,11 @@ test("badge flips to closed when the page stays open past closing time", async (
   await page.clock.runFor(6 * 60_000);
   await expect(page.getByTestId("open-badge")).toHaveAttribute("data-state", "closed");
 });
+
+for (const path of ["/", "/ta/"]) {
+  test(`address has no doubled punctuation on ${path}`, async ({ page }) => {
+    await page.goto(path);
+    const text = (await page.locator("#location address").innerText()).replace(/\s+/g, " ");
+    expect(text).not.toMatch(/,\s*,/);
+  });
+}

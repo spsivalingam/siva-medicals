@@ -34,7 +34,7 @@ export const en = {
     items: [
       { icon: "shield", title: "Genuine stock", body: "Sourced only from licensed distributors." },
       { icon: "badge", title: "Qualified pharmacist", body: "Clear guidance on dosage and timing." },
-      { icon: "clock", title: "Open late", body: "Open into the evening, six days a week. See hours below." },
+      { icon: "clock", title: "Open late", body: "Drop in after work. See hours below." },
       { icon: "smile", title: "Friendly service", body: "We speak Tamil and English." },
     ],
   },

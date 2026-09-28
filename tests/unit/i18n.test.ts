@@ -49,6 +49,12 @@ describe("copy holds no business details", () => {
   it("no clock times in UI copy (hours live in site.ts)", () => {
     for (const s of [...all(en), ...all(ta)]) expect(s).not.toMatch(/\d{1,2}[:.]\d{2}/);
   });
+  it("no counts of open days in UI copy (hours live in site.ts)", () => {
+    for (const s of [...all(en), ...all(ta)]) {
+      expect(s).not.toMatch(/\b(one|two|three|four|five|six|seven) days\b/i);
+      expect(s).not.toMatch(/(ஒரு|இரண்டு|மூன்று|நான்கு|ஐந்து|ஆறு|ஏழு) நாட்கள்/);
+    }
+  });
   it("delivery copy says prescription medicines need a verified prescription", () => {
     const delivery = en.services.items.find((i) => i.icon === "truck")!;
     expect(delivery.body).toMatch(/valid prescription/i);

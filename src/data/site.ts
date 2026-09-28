@@ -8,7 +8,7 @@ export const site = {
   whatsapp: "+91 99416 00345",
   email: "sivamedizone@gmail.com", // TODO: replace
   address: {
-    street: { en: "49, Jaganathan nagar, 16, Valluvar Salai, Jai Nagar,", ta: "49, ஜெகநாதன் நகர், 16, வள்ளுவர் சாலை, ஜெய் நகர்," },
+    street: { en: "49, Jaganathan nagar, 16, Valluvar Salai, Jai Nagar", ta: "49, ஜெகநாதன் நகர், 16, வள்ளுவர் சாலை, ஜெய் நகர்" },
     area: { en: "Arumbakkam", ta: "அரும்பாக்கம்" },
     city: { en: "Chennai", ta: "சென்னை" },
     region: { en: "Tamil Nadu", ta: "தமிழ்நாடு" },
