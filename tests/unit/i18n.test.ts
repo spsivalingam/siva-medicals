@@ -60,12 +60,19 @@ describe("copy holds no business details", () => {
     expect(en.why.items.map((i) => i.title)).toContain("Experienced professionals");
     expect(ta.why.items.map((i) => i.title)).toContain("அனுபவமிக்க பணியாளர்கள்");
   });
+  it("Tamil copy uses everyday words, not bookish ones", () => {
+    const { footer: _legal, ...copy } = ta; // footer disclaimer stays formal on purpose
+    for (const s of all(copy)) expect(s).not.toMatch(/தசாப்த|செல்லுபடியான|பரிந்துரை மருந்து|சுகாதார|விநியோகம்|கைபேசி|தரைவழி/);
+    expect(ta.services.items.map((i) => i.title)).toContain("வீட்டுக்கே டெலிவரி");
+    expect(ta.contact.phone).toBe("மொபைல்");
+    expect(ta.contact.landline).toBe("லேண்ட்லைன்");
+  });
   it("services no longer offer a free BP check", () => {
     for (const d of [en, ta]) expect(d.services.items.map((i) => i.title).join(" ")).not.toMatch(/BP/);
   });
   it("delivery copy says prescription medicines need a verified prescription", () => {
     const delivery = en.services.items.find((i) => i.icon === "truck")!;
     expect(delivery.body).toMatch(/valid prescription/i);
-    expect(ta.services.items.find((i) => i.icon === "truck")!.body).toMatch(/மருந்துச் சீட்ட/);
+    expect(ta.services.items.find((i) => i.icon === "truck")!.body).toMatch(/டாக்டர் சீட்டு.*சீட்டைப் பார்த்த பிறகே/);
   });
 });

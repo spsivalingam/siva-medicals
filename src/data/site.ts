@@ -3,7 +3,7 @@ import type { DayHours } from "../lib/hours";
 // TODO: replace every placeholder value in this file with the pharmacy's real details.
 // Keep name/address/phone identical to the Google Business Profile listing.
 export const site = {
-  name: { en: "Siva Medicals", ta: "சிவா மெடிகல்ஸ்" },
+  name: { en: "Siva Medicals", ta: "சிவா மெடிக்கல்ஸ்" },
   phone: "+91 99416 00345",
   whatsapp: "+91 99416 00345",
   landline: "044 23637656",

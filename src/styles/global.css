@@ -26,3 +26,9 @@ section[id] {
 :lang(ta) [data-testid="brand-name"] {
   line-height: 1.35;
 }
+/* Tamil name is wider; keep it on one line on 360px phones */
+@media (width < 40rem) {
+  :lang(ta) [data-testid="brand-name"] {
+    font-size: 1.125rem;
+  }
+}

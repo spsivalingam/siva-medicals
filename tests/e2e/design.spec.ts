@@ -87,7 +87,7 @@ test("viewport covers the notch area and the bottom bar pads for the home indica
 });
 
 test.describe("header height on phones", () => {
-  test.use({ viewport: { width: 375, height: 760 } });
+  test.use({ viewport: { width: 360, height: 760 } });
   for (const path of ["/", "/ta/"]) {
     test(`stays within 64px on ${path}`, async ({ page }) => {
       await page.goto(path);
