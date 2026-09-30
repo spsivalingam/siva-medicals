@@ -2,7 +2,7 @@ export const en = {
   meta: {
     tagline: "Trusted neighbourhood pharmacy",
     description:
-      "Genuine medicines, a pharmacist on duty, health devices and local home delivery. Call or WhatsApp us.",
+      "Genuine medicines, experienced staff, health devices and local home delivery. Call or WhatsApp us.",
   },
   a11y: { skip: "Skip to main content" },
   brand: { what: "Pharmacy", since: "Since {year}" },
@@ -21,11 +21,11 @@ export const en = {
   services: {
     title: "What we offer",
     items: [
-      { icon: "pill", title: "Prescription medicines", body: "Dispensed by a pharmacist against a valid prescription." },
+      { icon: "pill", title: "Prescription medicines", body: "Dispensed only against a valid prescription." },
       { icon: "heart", title: "OTC & wellness", body: "Vitamins, first aid, personal care and everyday health essentials." },
       { icon: "baby", title: "Mother & baby care", body: "Baby food, diapers, skincare and maternity essentials." },
       { icon: "device", title: "Health devices", body: "BP monitors, glucometers, thermometers and nebulisers." },
-      { icon: "truck", title: "Local home delivery", body: "Nearby same-day delivery. Prescription medicines are delivered only after our pharmacist checks a valid prescription." },
+      { icon: "truck", title: "Local home delivery", body: "Nearby same-day delivery. Prescription medicines are delivered only after we check a valid prescription." },
     ],
   },
   why: {
@@ -33,7 +33,7 @@ export const en = {
     items: [
       { icon: "since", title: "Since {year}", body: "A neighbourhood pharmacy families have trusted for decades." },
       { icon: "shield", title: "Genuine stock", body: "Sourced only from licensed distributors." },
-      { icon: "badge", title: "Qualified pharmacist", body: "Clear guidance on dosage and timing." },
+      { icon: "badge", title: "Experienced professionals", body: "Clear guidance on dosage and timing." },
       { icon: "clock", title: "Open late", body: "Drop in after work. See hours below." },
       { icon: "smile", title: "Friendly service", body: "We speak Tamil and English." },
     ],

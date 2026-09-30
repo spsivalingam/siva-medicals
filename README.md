@@ -5,7 +5,7 @@ Bilingual (English + தமிழ்) static website for a neighbourhood pharmac
 ## Edit the pharmacy's details
 
 1. Open `src/data/site.ts` and replace every value marked `// TODO: replace` (the WhatsApp number must be a mobile registered on WhatsApp)
-   (name, phone, WhatsApp, email, address, map coordinates, hours, licence numbers, pharmacist).
+   (name, phone, WhatsApp, email, address, map coordinates, hours, since year).
 2. Set your real domain in `astro.config.mjs` → `site`.
 3. Wording lives in `src/i18n/en.ts` and `src/i18n/ta.ts`. Please have a native Tamil speaker proofread `ta.ts`.
 4. Regenerate the social preview image: `npm run og` (edit text in `scripts/og-image.mjs` first).
@@ -47,5 +47,4 @@ If served from `https://<user>.github.io/<repo>/`, also set `base: "/<repo>"` in
 ## Compliance notes
 
 - Informational site only: no online sale of medicines, no prices for prescription drugs, no therapeutic claims.
-- Licence and pharmacist details are shown in the footer.
 - No forms or cookies; the site collects no personal data. Prescriptions are shared via WhatsApp.
